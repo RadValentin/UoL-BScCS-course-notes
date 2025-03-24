@@ -1,5 +1,7 @@
 # UoL BScCS Course Notes
-Notes taken by me while studying [BSc Computer Science offered by Goldsmiths, University of London](https://www.london.ac.uk/study/courses/undergraduate/bsc-computer-science).
+Notes taken while studying [BSc Computer Science offered by Goldsmiths, University of London](https://www.london.ac.uk/study/courses/undergraduate/bsc-computer-science) from April 2021 to March 2025.
+
+Images, text and any other resources contained in this repo were taken without giving attribution to the original sources. The repo owner doesn't claim any sort of copyright over its contents. This is just a collection of notes taken as a student for the purposes of learning and should be treated as such.
 
 ## Notes list
 
