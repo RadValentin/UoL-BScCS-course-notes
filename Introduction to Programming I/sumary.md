@@ -204,8 +204,27 @@ About Chrome Dev Tools Sources tab:
 - p5 Vector, `createVector()` ,`.rotate()`, `.mult()`, `.normalize()`
 - Static versions of vector methods: `p5.Vector.rotate()`, `p5.Vector.mult()`
 
+
+JavaScript objects can have both properties and methods. Methods can use the object's properties by referencing them with the `this` keyword.
+
+```js
+// an object
+var myObj = {
+    // properties
+    width: 200,
+    height: 300,
+    // a method that prints the properties
+    showDimensions: function() {
+        console.log("object width: " + this.width);
+        console.log("object height: " + this.height);
+    }
+};
+
+// calling a method on the object
+myObj.showDimensions();
+```
+
 ### TODO
-- Hack it rocket
 - P5 Vector
 - Tamagotchi eye rotation
 
