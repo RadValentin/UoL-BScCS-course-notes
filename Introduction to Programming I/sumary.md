@@ -224,8 +224,41 @@ var myObj = {
 myObj.showDimensions();
 ```
 
+### p5.Vector
+`rotate()` - Rotates a 2D vector by an angle without changing its magnitude. The rotation happens in relation to the origin of the coordinate space. By default the angle is in *radians* ($360^\circ = 2 \pi$).
+
+```js
+// example of how to rotate a point represented as a vector
+var myPoint;
+
+function setup() {
+    createCanvas(300, 300);
+    myPoint = createVector(0, -100);
+}
+
+function draw() {
+    background(0);
+    fill(255);
+
+    // translates the coordinate space to the middle of the screen
+    translate(width/2, height/2);
+
+    // draws a point at the vector coordinates
+    ellipse(myPoint.x, myPoint.y, 20);
+
+    // update the vector position by applying a small rotation,
+    // this will animate the point's position
+    myPoint.rotate(0.1);
+}
+```
+
+`mult()` - multiplies the vector's xyz components by a scalar value.
+
+Note: Static versions of the vector operations are available on the `Vector` class. These don't change the vector directly, instead they return the changed version of the vector. Ex: `newVec = p5.Vector.mult(oldVector, 4)`.
+
+`normalize` - makes the vector a *unit vector*, its *length* will be $1$.
+
 ### TODO
-- P5 Vector
 - Tamagotchi eye rotation
 
 ## Week 18
