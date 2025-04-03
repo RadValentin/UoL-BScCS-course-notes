@@ -258,16 +258,12 @@ Note: Static versions of the vector operations are available on the `Vector` cla
 
 `normalize` - makes the vector a *unit vector*, its *length* will be $1$.
 
-### TODO
-- Tamagotchi eye rotation
-
 ## Week 18
 ### Learning Objectives
 
 - Code philosophy: Googling for help
     - separate the generic issue from the unique parts of your implementation
 - Game project part 7: make it awesome
-    - TODO: come back to this after finishing the course
     - sounds: jump, collectible, die, bg music (loop)
 
 ## Week 19
@@ -275,9 +271,26 @@ Note: Static versions of the vector operations are available on the `Vector` cla
 
 - The Factory Pattern - create an object inside a function and return it
 - The `constructor` function and the `new` keyword
-- TODO: Particle system
-- Factory pattern vs constructor pattern:
-    - If the created object has methods, the constructor patern is best
+- Factory pattern vs constructor pattern: if the created object has methods then the constructor pattern is best
+
+```js
+// the constructor is a function that defines the object properties
+function MyObjectConstructor(x, y, name) {
+    this.x = x;
+    this.y = y;
+    this.name = name;
+    this.display = function() { /*...*/ };
+
+    // the object is automatically returned
+}
+
+// instantiate a new object using the constructor function
+let newObj = new MyObjectConstructor(10, 20, 'cat');
+```
+
+### Particle system
+- Particles have a lifetime
+- Emitter: holds all particles, adds new particles or removes them at the end of the lifetime
 
 ## Week 20
 ### Learning Objectives
