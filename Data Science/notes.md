@@ -6,13 +6,19 @@ Lecturer: Dr. Tony Russel-Rose, Konstantin Kapinchev
 
 **Data types in statistics**
 - *Categorical*
-  - nominal - no quantitative value, no order
-  - ordinal - no quantitative value, can be ordered
+  - *nominal* - no quantitative value, no order
+    - ex: hair color, city of birth, religion, favorite fruit
+  - *ordinal* - no quantitative value, can be ordered, but no exact distance between categories
+    - ex: education level (High School < Bachelor’s < Master’s < PhD)
 - *Numerical*
-  - interval - no clear zero value, ex: year
-  - ratio - most measurements belong here
+  - *interval* - ordered, equal spacing, no true zero value
+    - ex: year, IQ scores, temperature ($0^\circ \neq$ no temperature)
+  - *ratio* - most measurements belong here, has meaningful zero
+    - ex: height, weight, age, income, distance
 
-**Common data structures used in Python**: lists, dictionaries, arrays (NumPy), DataFrames (pandas), graphs (NetworkX)
+A **meaningful (or true)** zero means that zero represents the complete absence of the quantity being measured.
+
+**Common data structures used in Python**: lists, dictionaries, arrays (NumPy), DataFrames (pandas), graphs (NetworkX).
 
 ## Week 2 - Python
 
