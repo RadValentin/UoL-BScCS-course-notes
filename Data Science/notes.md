@@ -16,7 +16,7 @@ Lecturer: Dr. Tony Russel-Rose, Konstantin Kapinchev
   - *ratio* - most measurements belong here, has meaningful zero
     - ex: height, weight, age, income, distance
 
-A **meaningful (or true)** zero means that zero represents the complete absence of the quantity being measured.
+A **meaningful (or true)** zero means that zero represents the complete *absence of the quantity* being measured.
 
 **Common data structures used in Python**: lists, dictionaries, arrays (NumPy), DataFrames (pandas), graphs (NetworkX).
 
@@ -46,7 +46,7 @@ Python tutorial: https://docs.python.org/3/tutorial/
 ## Week 3 Part 1 - Numpy
 Numpy provides an efficient interface to store and operate on dense data buffers.
 
-A basic variable in C is the label of a position in memory while in Python a variable is a pointer to a compound C structure that contains: reference count, type, size and actual data. When storing values in a list, each is treated like a separate variable which creates redundant data. Both fixed type arrays and numpy arrays resolve this issue by storing only the raw data for each element.
+A basic variable in C is the label of a position in memory while in Python a variable is a pointer to a compound C structure that contains: reference count, type, size and actual data. When storing values in a list, each is treated like a separate variable which creates redundant data. Both *fixed type arrays* and *numpy arrays* resolve this issue by storing only the raw data for each element.
 
 ```py
 arr1 = array('i', [1,2,3]) # fixed type array stores only integers (i)
@@ -64,7 +64,8 @@ np.empty(shape=(50,10), dtype=int)
 # empty array with structured data, U10 is a 10 character unicode string
 np.empty(shape=10, dtype=[('Title', 'U10'), ('Year', int), ('Price', float)])
 
-# initialise the random number generator
+# initialise the random number generator,
+# a seed ensures the _same_ numbers will be generated each time the code is run.
 np.random.seed(0)
 # array with 10 elements, values from [-5, 5)
 np.random.randint(-5, 5, 10, dtype=int)
@@ -77,7 +78,7 @@ np.ones(shape=10, dtype=int)  # filled with 1
 np.full(shape=10, fill_value=7, dtype=int) # filled with 7
 ```
 
-Elements of 2d array can be accessed in multiple ways: `myArray[i][j]` or `myArray[i, j]`
+Elements of a 2d array can be accessed in multiple ways: `myArray[i][j]` or `myArray[i, j]`
 
 Numpy aggregation functions: `myArray.min()`, `myArray.max()`, `myArray.sum()`, `np.average(myArray)`
 
@@ -90,7 +91,7 @@ Aggregation can be done for a single axis in multi dimensional arrays, ex: `np.s
 ```py
 np.array([1, 2, 3, 4]) # array from list
 
-# arrange - (arrayrange) values that grow incrementally
+# arange - (arrayrange) values that grow incrementally, evenly spaced values within a given interval
 np.arange(10) # array with elements from [0, 10)
 np.arange(2, 10, dtype=float) # floats from [2, 10)
 np.arange(2, 3, 0.1) # floats from [2,3) growing by .1
@@ -104,7 +105,7 @@ The attributes of an array can be exposed via the properties:
 - *size* - total number of elements in the array
 - *ndim* - number of dimensions (ex: 2)
 - *dtype* - data type of each element (ex: `int32`)
-- *itemsize* - size in bytes of each elements
+- *itemsize* - size in bytes of each element
 - *nbytes* - size in bytes of the whole array
 
 ### Array manipulation
@@ -375,7 +376,7 @@ Statistics uses two main measurements to describe a dataset:
 
 **Measures of central tendency** evaluate a central value, around which the data cluster around. There are 3 popular measures for it:
 - *Mean* - arithmetic average
-- *Median* - splits the dataset into two halves
+- *Median* - the middle value of a dataset when it's sorted in order
 - *Mode* - the data point which appears most frequently
 
 ```py
@@ -391,8 +392,8 @@ print('Mode: ', st.mode(S)[0])
 
 **Measures of spread** evaluate how data are spread around certain central values. Three common measures for it are:
 - *Range* - difference between minimum and maximum
-- *Standard deviation* - the average distance from a data point to the mean value
-- *Variance* - $variance = sd ^ 2$
+- *Standard deviation ($sd$)* - the average distance from a data point to the mean value
+- *Variance* - how spread out the values are around the mean, $variance = sd ^ 2$
 
 ```py
 print('Range: ', np.max(S) - np.min(S))
@@ -405,7 +406,7 @@ print('Standard deviation', np.std(S))
 
 **Vector** - a quantity represented by a direction and a magnitude. Vectors can be defined for any dimension (n): $v = (a_1, a_2, ..., a_n)$
 
-1. Scalar multiplication
+**Scalar multiplication**
   - Scalar: $a$
   - Vector: $v = (v_1, v_2, ..., v_n)$
   - $av = a(v_1, v_2, ..., v_n) = (av_1, av_2, ..., av_n)$
@@ -416,7 +417,7 @@ print('Standard deviation', np.std(S))
 np.array([1,2,3]) * 5
 ```
 
-2. Vector addition
+**Vector addition**
   - Vectors: $x, y, z$ (same dimension)
   - $x = (x_1, x_2, ..., x_n), y = (y_1, y_2, ..., y_n)$
   - $z = x + y = (x_1 + y_1, x_2 + y_2, ..., x_n + y_n)$
@@ -427,7 +428,7 @@ np.array([1,2,3]) * 5
 np.add(np.array([1,2,3]), np.array([4,5,6]))
 ```
 
-3. Dot product
+**Dot product**
   - Vectors: $x, y$ (same dimension)
   - $x = (x_1, x_2, ..., x_n), y = (y_1, y_2, ..., y_n)$
   - $z = x * y = x_1y_1 + x_2y_2 + ... + x_ny_n$
