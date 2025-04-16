@@ -13,6 +13,7 @@ Images, text and any other resources contained in this repo were taken without g
 **Level 6**
 
 - [CM3005 Data Science](./Data%20Science/notes.md)
+  - Note: Make sure to evaluate your own work (self-evaluation) in the midterm report. It's easy to not pay attention to this and you'll lose points for it.
 
 ## Tips & Tricks
 
@@ -29,7 +30,6 @@ Readings offer extra information on top what was taught but they can sometimes b
 You'll soon find out that most modules leave a lot of room for interpretation when it comes to grading, with *~30%* of the grade being reserved for *stellar work*. In other words if you do everything like it was taught you get a maximum of 70%. The math modules on the other hand are easier to "game", if you do all the exercises correctly you get the top marks, so keep this in mind.
 
 **Team assignments eat up a LOT of time**
-
 
 
 ## Resources
