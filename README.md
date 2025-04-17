@@ -10,10 +10,15 @@ Images, text and any other resources contained in this repo were taken without g
 - [CM1005 Introduction to Programming I](./Introduction%20to%20Programming%20I/sumary.md)
   - Note: Work on the Sleuth cases as soon as you can, they make up 50% of the final grade, don't leave them all for the end.
 
+**Level 5**
+TODO
+
 **Level 6**
 
 - [CM3005 Data Science](./Data%20Science/notes.md)
   - Note: Make sure to evaluate your own work (self-evaluation) in the midterm report. It's easy to not pay attention to this and you'll lose points for it.
+- CM3035 Advanced Web Development - *IN PROGRESS*
+  - Note: Redis doesn't run natively on Windows but you can use WSL to get around this limitation, see [this guide](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/).
 
 ## Tips & Tricks
 
