@@ -798,7 +798,7 @@ df['age'].mean()
 Marginal and extreme data points affect the mean value, the median is not so susceptible to outliers.
 
 ### Quartiles and Percentiles
-Quartiles are values which split the dataset into 4 equal parts. In a rank-ordered data set:
+**Quartiles** are values which divide a *sorted* dataset into four equal parts. In a rank-ordered data set:
 - **Q1** is the median of the first half
   - called lower quartile or *25th percentile*
   - splits the data into 25% - 75%
@@ -862,9 +862,7 @@ Standard deviation is one of the measures of spread. It measures the average dis
 Standard deviation is the square root of the variance, which is another measure of spread. Unlike variance, standard deviation is measured in the *same units* as the data points.
 
 #### Standard deviation of a sample
-If we only have data about a **sample** from a population then the previous formula will give a biased result. We can account for this by applying Bessel's correction: changing $N$ to $N-1$. 
-
-There will still be a bias for small sample sizes but this bias will decrease as the sample size increases.
+If we only have data about a **sample** from a population then the previous formula will give a biased result. We can account for this by applying *Bessel's correction*: changing $N$ to $N-1$. There will still be a bias for small sample sizes but this bias will decrease as the sample size increases.
 
 #### Normal distribution
 <figure>
