@@ -15,6 +15,8 @@ TODO
 
 **Level 6**
 
+- [CM3045 3D Graphics and animation](./3D%20Graphics%20&%20Animation/summary.md)
+  - Note: Make sure to do the peer-review lab exercises. Those before Week 10 will be part of the midterm and those after can/will show up in the exam.
 - [CM3005 Data Science](./Data%20Science/notes.md)
   - Note: Make sure to evaluate your own work (self-evaluation) in the midterm report. It's easy to not pay attention to this and you'll lose points for it.
 - CM3035 Advanced Web Development - *IN PROGRESS*
