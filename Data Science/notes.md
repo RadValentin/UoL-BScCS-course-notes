@@ -411,7 +411,7 @@ print('Standard deviation', np.std(S))
   - Vector: $v = (v_1, v_2, ..., v_n)$
   - $av = a(v_1, v_2, ..., v_n) = (av_1, av_2, ..., av_n)$
 
-![scalar multiplication](assets/scalar-multiplication.png)
+<img alt="scalar multiplication" src="assets/scalar-multiplication.png" style="max-width:50%" />
 
 ```py
 np.array([1,2,3]) * 5
