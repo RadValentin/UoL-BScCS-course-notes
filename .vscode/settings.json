@@ -1,4 +1,12 @@
 {
   "cSpell.maxNumberOfProblems": 1000,
-  "cSpell.words": ["timestep"]
+  "cSpell.words": [
+    "GLSL",
+    "HLSL",
+    "overrightarrow",
+    "Phong",
+    "smallmatrix",
+    "timestep",
+    "Varyings"
+  ]
 }

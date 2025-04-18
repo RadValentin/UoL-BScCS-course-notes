@@ -410,6 +410,8 @@ Given two points $P_0 = (x_0, y_0, z_0)$ at time $t_0$ and $P_1 = (x_1, y_1, z_1
 
 $$ P(t) = P_0 + \frac{t-t_0}{t_1-t_0} (P_1 - P_0) $$
 
+More on LERPing: https://chicounity3d.wordpress.com/2014/05/23/how-to-lerp-like-a-pro/
+
 #### Spline interpolation
 Produces a smoother curve with no sudden changes in direction (continuous velocity).
 
