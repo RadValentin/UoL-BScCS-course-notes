@@ -81,7 +81,7 @@
 Design and build a web site for a theme park, 3 pages minimum, only HTML and CSS will be marked.
 
 #### TO DO
-- Keep a diary of yout activities and your team members activities within the group for your reflective essay.
+- Keep a diary of your activities and your team members activities within the group for your reflective essay.
     - roles and contributions
     - positive aspects of your team work
     - negative aspects of your team work
@@ -179,7 +179,7 @@ Design and build a web site for a theme park, 3 pages minimum, only HTML and CSS
 ## Week 13
 
 - Introduction to JavaScript
-- Client side langauges vs Server side languages
+- Client side languages vs Server side languages
 - Adding dynamic elements to a page
 
 ```js
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 - Updating the content of DOM elements: `element.insertAdjacentHTML(position, text)`
 - Setting element style: `element.style.color = "red"`
     - Every CSS property has a JS equivalent, ex: `text-align -> element.style.textAlign`
-    - Seeting multiple properties at once: `element.setAttribute("style", "color: red; text-align: center")`
+    - Setting multiple properties at once: `element.setAttribute("style", "color: red; text-align: center")`
 - HTML attributes have equivalent JS attributes: `element.onclick = function() {...}`, `element.className = "foo"`
 
 ## Week 15
@@ -326,7 +326,7 @@ function boxResize(e) {
 - helpers: block helpers and tag helpers
 - `Handlebars.registerHelper("name",  function() {});`
 - strings returned by a helper are rendered as text and not HTML
-- to get HTML ouput: `return new Handlebars.SafeString(output)`
+- to get HTML output: `return new Handlebars.SafeString(output)`
 - to escape a string: `Handlebars.Utils.escapeExpression(string)` or by using triple braces `{{{placeholder}}}`
 - built in block helpers: `{{#each}}`, `{{#if}}`, `{{#unless}}` (opposite of if)
 - custom block helpers can be defined `{{#myHelper}} ... {{/myHelper}}`
