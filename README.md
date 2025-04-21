@@ -9,6 +9,7 @@ Images, text and any other resources contained in this repo were taken without g
 
 - [CM1005 Introduction to Programming I](./Introduction%20to%20Programming%20I/sumary.md)
   - Note: Work on the Sleuth cases as soon as you can, they make up 50% of the final grade, don't leave them all for the end.
+- [CM1040 Web Development](./Web%20Development/summary.md)
 
 **Level 5**
 TODO
