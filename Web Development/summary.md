@@ -1,4 +1,5 @@
 # Web Development
+Lecturer: Nick Hine
 
 ## TODOS
 
@@ -17,21 +18,12 @@
     - [ ] https://developers.google.com/web/fundamentals/native-hardware/device-orientation/
     - [ ] https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event (deprecated)
 
-## Feedback
-
-- Update the course to use discussion prompts instead of directing students to forums, this will increase engagement with the topic and encourage communication
-- Update the videos to NOT place the `<footer>` tag outside of the `<body>`
-- Have more hands-on video examples in the HTML part of the course, like the JS part has
-
 ## Week 1
-
-- Lecturer: Nick Hine
 - the web, web pages, web sites, search engines, navigation, domain names, links
 - 2018: 1.9 billion web sites, 500 million active websites, couple billion people with internet access (~4 billion)
 - web content, semantic elements
 
 ### Tips
-
 - 10h - 12h per topic, rest of the time spent on coursework:
     - group project and individual essay - 15h
     - individual project and report - 35h
@@ -43,11 +35,9 @@
     - https://www.visual-paradigm.com/
 
 ## Week 2
-
 - DOM - Document Object Model
 
 ## Week 3
-
 - Designing a web site: drawing, layout, page elements
 - Design avoids the waste of time and money that happens after the "let it happen" approach
 - Design:
@@ -64,7 +54,6 @@
 - Wireframes to describe the layout of the content, the sections of the page, type of info in the sections.
 
 ## Week 4
-
 - HTML - page structure
 - Hypertext - Text with references (hyperlinks) to other pages or resources.
 - Semantics in page design: document level semantics (`<navbar>`), group level (`<ul>`, `<p>`), text level (`<b>`, `<em>`).
@@ -77,7 +66,6 @@
     - Styling - applied to the HTML skeleton
 
 ### Team assignment
-
 Design and build a web site for a theme park, 3 pages minimum, only HTML and CSS will be marked.
 
 #### TO DO
@@ -100,7 +88,6 @@ Design and build a web site for a theme park, 3 pages minimum, only HTML and CSS
 ![How To Work In A Team](assets/how-to-work-in-a-team.png)
 
 ## Week 5
-
 - Introduction to HTML, HTML syntax, HTML head
 - The goals of HTML
     - Platform independence
@@ -109,15 +96,12 @@ Design and build a web site for a theme park, 3 pages minimum, only HTML and CSS
 - Markup - extra information added to content so the browser knows how to display and interpret that content.
 
 ## Week 6
-
 - HTML body: formatting tags, layout tags, semantic tags, media tags, tables
 
 ## Week 7
-
-**TO DO** Research CSS1 specification: https://www.w3.org/TR/CSS1/
+First CSS specification: https://www.w3.org/TR/CSS1/
 
 ### Introduction to CSS
-
 - Types of styles: inline styles, embedded styles (in the head), stylesheets, default browser styles
 - cascading styles precedence: default styles < external styles < embedded styles < inline styles
 - `<link rel="stylesheet" type="text/css" href="....">`
@@ -129,13 +113,11 @@ Design and build a web site for a theme park, 3 pages minimum, only HTML and CSS
     - Typography for the Web: Webinar Recap and Resources: https://web.archive.org/web/20190108204202/https://www.aiga.org/aiga/content/inspiration/typography-for-the-web-webinar-recap-and-resources/
 
 ## Week 8
-
 - CSS colouring - `color` property, named colours, hex colours, RGB, HSL
 
 ![colors in web design](assets/colors-in-web-design.png)
 
 ## Week 9
-
 - Layout, positioning, measurement, animations
 - CSS box model
     - content > padding > border > margin
@@ -148,23 +130,19 @@ Design and build a web site for a theme park, 3 pages minimum, only HTML and CSS
     - grids and columns
 
 ### CSS Grid
-
 - parent defines grid layout: `position: grid`, `grid-template-rows`, `grid-template-columns`, `grid-template-areas`
 - child is placed in the grid: `grid-column`, `grid-row` OR `grid-area`
 
 ## Week 9
-
 - Styling media and animations
     - properties: `opacity`, `filter`, `transform`, `@keyframes`
     - buttons: `:hover` - hover state communicates to the user that the button is an interactive element on the page
     - `<object>`
 
 ## Week 11
-
 - Responsive Web Development, `@media` queries
 
 ## Week 12
-
 - CSS frameworks, cascading styles
     - Frameworks when used indiscriminately, websites take on the familiar appearance associated with one framework or another.
     - Use a framework to enhance a predefined design rather than letting the framework dictate the design.
@@ -177,7 +155,6 @@ Design and build a web site for a theme park, 3 pages minimum, only HTML and CSS
     - Explanatory text for images and graphics
 
 ## Week 13
-
 - Introduction to JavaScript
 - Client side languages vs Server side languages
 - Adding dynamic elements to a page
@@ -203,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
 ```
 
 ## Week 14
-
 - Selecting DOM elements
 - Updating the content of DOM elements: `element.insertAdjacentHTML(position, text)`
 - Setting element style: `element.style.color = "red"`
@@ -212,9 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 - HTML attributes have equivalent JS attributes: `element.onclick = function() {...}`, `element.className = "foo"`
 
 ## Week 15
-
 ### JavaScript events
-
 - Event flow - clicking on an element also means clicking on its parent and on the page body
 - DOM Level 2 event flow comprised of: event capturing and event bubbling, https://javascript.info/bubbling-and-capturing
 - Browsers implement event flow differently
@@ -229,7 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
 - Indirect events: `onload`, `onbeforeunload`, `onscroll`
 
 ### Event bubbling
-
 - `event.target` - the "target" element that initiated the event, it doesn’t change through the bubbling process
 - `this` or `event.currentTarget` - the "current" element, the one that has a currently running handler on it
 - A bubbling event goes from the target element straight up. Normally it goes upwards till `<html>`, and then to `document` object, and some events even reach `window`, calling all handlers on the path
@@ -238,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
 - We can write our data into the `event` object in one handler and read it in another one, so we can pass to handlers on parents information about the processing below
 
 ### Event capturing
-
 `elem.addEventListener(..., {capture: true})`
 
 The 3 phases of event propagation:
@@ -249,7 +221,6 @@ The 3 phases of event propagation:
 ![Event Flow](/assets/eventflow.svg)
 
 ## Week 16
-
 ### Mouse Events
 
 - Mouse events: `click`, `mousedown` ,`mouseenter`, `mousemove`, `mouseover`, `mouseout` etc.
@@ -285,21 +256,18 @@ function boxResize(e) {
 ```
 
 ### Form Events
-
 - context highlighting
 - `focus` and `blur` events - click on element, tab on element, click on label to focus input
 - a11y of HTML form elements by reacting to `focus` and `blur` events
 - `change` event - select menus, radio buttons and checkboxes
 
 ### Key Events
-
 - `keydown`, `keypress`, `keyup`
 - Event properties: `key` - `v` (letter), `Enter`, `ArrowUp`, `ArrowDown`, etc.
 - https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values
 - On Mobile key events might be tricky to react to because of different input methods
 
 ### Touch Events
-
 - `touchstart`, `touchend`, `touchmove`
 - `touchmove` implies `touchstart` event happened before it
 - Event properties: `touches` (`event.touches[i].pageX`)
@@ -309,9 +277,7 @@ function boxResize(e) {
 - `event.stopPropagation()` - stops the event from bubbling up to next event listener
 
 ## Week 17
-
 ### Templating engines
-
 - Server side vs client side templating
 - Mustache - https://mustache.github.io/
     - logic less templating engine
@@ -320,9 +286,7 @@ function boxResize(e) {
     - precompiled templates
 
 ## Week 18
-
 ### Helpers
-
 - helpers: block helpers and tag helpers
 - `Handlebars.registerHelper("name",  function() {});`
 - strings returned by a helper are rendered as text and not HTML
@@ -377,9 +341,7 @@ function boxResize(e) {
 ```
 
 ## Week 19
-
 Web hosting, IPs, home server vs commercial server, domain names
 
 ## Week 20
-
 Code of conduct, BCS, The Chartered Institute for IT
