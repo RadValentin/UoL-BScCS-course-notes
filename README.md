@@ -8,21 +8,26 @@ Images, text and any other resources contained in this repo were taken without g
 **Level 4**
 
 - [CM1005 Introduction to Programming I](./Introduction%20to%20Programming%20I/sumary.md)
-  - Note: Work on the Sleuth cases as soon as you can, they make up 50% of the final grade, don't leave them all for the end.
+  > [!TIP] Work on the Sleuth cases as soon as you can, they make up 50% of the final grade, don't leave them all for the end.
 - [CM1040 Web Development](./Web%20Development/summary.md)
-  - Note: Course material leaves a lot to be desired, make sure to supplement your learning with other online resources as you'll likely need to build websites in future modules (DNW, AWD, DADT, etc).
+  > [!TIP] Course material leaves a lot to be desired, make sure to supplement your learning with other online resources as you'll likely need to build websites in future modules (DNW, AWD, DADT, etc).
 
 **Level 5**
+
 TODO
 
 **Level 6**
-
-- [CM3045 3D Graphics and animation](./3D%20Graphics%20&%20Animation/summary.md)
-  - Note: Make sure to do the peer-review lab exercises. Those before Week 10 will be part of the midterm and those after can/will show up in the exam.
 - [CM3005 Data Science](./Data%20Science/notes.md)
-  - Note: Make sure to evaluate your own work (self-evaluation) in the midterm report. It's easy to not pay attention to this and you'll lose points for it.
-- CM3035 Advanced Web Development - *IN PROGRESS*
-  - Note: Redis doesn't run natively on Windows but you can use WSL to get around this limitation, see [this guide](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/).
+  >[!TIP]
+  > Make sure to evaluate your own work (self-evaluation) in the midterm report. It's easy to not pay attention to this and you'll lose points for it.
+- [CM3035 Advanced Web Development](./Advanced%20Web%20Development/summary.md) - *IN PROGRESS*
+  > [!TIP]
+  > Redis doesn't run natively on Windows but you can use WSL to get around this limitation, see [this guide](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/).
+
+  > [!TIP]
+  > Learn how to deploy your app to AWS or some other hosting service. This is worth 10% of both the midterm and final grade.
+- [CM3045 3D Graphics and animation](./3D%20Graphics%20&%20Animation/summary.md)
+  > [!TIP] Make sure to do the peer-review lab exercises. Those before Week 10 will be part of the midterm and those after can/will show up in the exam.
 
 ## Tips & Tricks
 
