@@ -4,33 +4,35 @@ Notes taken while studying [BSc Computer Science offered by Goldsmiths, Universi
 Images, text and any other resources contained in this repo were taken without giving attribution to the original sources. The repo owner doesn't claim any sort of copyright over its contents. This is just a collection of notes taken as a student for the purposes of learning and should be treated as such.
 
 ## Notes list
+### Level 4
+#### [CM1005 Introduction to Programming I](./Introduction%20to%20Programming%20I/sumary.md)
+> [!TIP] 
+> Work on the Sleuth cases as soon as you can, they make up 50% of the final grade, don't leave them all for the end.
 
-**Level 4**
+#### [CM1040 Web Development](./Web%20Development/summary.md)
+> [!TIP] 
+> Course material leaves a lot to be desired, make sure to supplement your learning with other online resources as you'll likely need to build websites in future modules (DNW, AWD, DADT, etc).
 
-- [CM1005 Introduction to Programming I](./Introduction%20to%20Programming%20I/sumary.md)
-  > [!TIP] Work on the Sleuth cases as soon as you can, they make up 50% of the final grade, don't leave them all for the end.
-- [CM1040 Web Development](./Web%20Development/summary.md)
-  > [!TIP] Course material leaves a lot to be desired, make sure to supplement your learning with other online resources as you'll likely need to build websites in future modules (DNW, AWD, DADT, etc).
-
-**Level 5**
-
+### Level 5
 TODO
 
-**Level 6**
-- [CM3005 Data Science](./Data%20Science/notes.md)
-  >[!TIP]
-  > Make sure to evaluate your own work (self-evaluation) in the midterm report. It's easy to not pay attention to this and you'll lose points for it.
-- [CM3035 Advanced Web Development](./Advanced%20Web%20Development/summary.md) - *IN PROGRESS*
-  > [!TIP]
-  > Redis doesn't run natively on Windows but you can use WSL to get around this limitation, see [this guide](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/).
+### Level 6
+#### [CM3005 Data Science](./Data%20Science/notes.md)
+>[!TIP]
+> Make sure to evaluate your own work (self-evaluation) in the midterm report. It's easy to not pay attention to this and you'll lose points for it.
 
-  > [!TIP]
-  > Learn how to deploy your app to AWS or some other hosting service. This is worth 10% of both the midterm and final grade.
-- [CM3045 3D Graphics and animation](./3D%20Graphics%20&%20Animation/summary.md)
-  > [!TIP] Make sure to do the peer-review lab exercises. Those before Week 10 will be part of the midterm and those after can/will show up in the exam.
+#### [CM3035 Advanced Web Development](./Advanced%20Web%20Development/summary.md) - *IN PROGRESS*
+> [!TIP]
+> Redis doesn't run natively on Windows but you can use WSL to get around this limitation, see [this guide](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/).
+
+> [!TIP]
+> Learn how to deploy your app to AWS or some other hosting service. This is worth 10% of both the midterm and final grade.
+
+#### [CM3045 3D Graphics and animation](./3D%20Graphics%20&%20Animation/summary.md)
+> [!TIP] 
+> Make sure to do the peer-review lab exercises. Those before Week 10 will be part of the midterm and those after can/will show up in the exam.
 
 ## Tips & Tricks
-
 **Don't sleep on the midterms**
 Start working on the midterm assignments as soon as they're given to you. The midterm is usually less demanding then the finals as it covers only the first 10 weeks of lectures and it's a good opportunity to get a good grade at the end. Midterm weighs 30% to 50% of the final grade. **If you fail the midterm, you will fail the module** so don't leave it for the last possible moment.
 
@@ -47,7 +49,6 @@ You'll soon find out that most modules leave a lot of room for interpretation wh
 
 
 ## Resources
-
 - [REPL: The Learning Hub for UoL's Online CS Students](https://world-class.github.io/REPL/) - has useful info about each module, student notes.
 - [UoL Grades Calculator](https://uol-grades-calculator.readthedocs.io/en/latest/) - track your progress throughout the degree, calculates average grade.
 - [Going Next Level - UoL CS Bsc](https://docs.google.com/spreadsheets/d/1vyRqV4BVxZx9nVJvLJtUYI19aAgChu-4aPunoVS7uAg/edit?usp=sharing) - spreadsheet with all the modules, gives info on how they're graded, quality of each module, good tool to know which modules to pick.
