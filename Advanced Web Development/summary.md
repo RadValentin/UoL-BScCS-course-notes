@@ -59,27 +59,40 @@ workon env_name
 deactivate
 ```
 
-### Internet Protocol Suite - TCP/IP 
+### Internet Protocol Suite - TCP/IP
+**TCP/IP** is an *umbrella term* for a suite (multitude) of protocols that allow for communication on the web. The two main protocols are:
 - *TCP (transmission control protocol)* provides the means of delivering error checked streams of bytes between Internet Protocol connected computers.
 - *IP (internet protocol)* governs how to relay and route packets of data across computers on connected networks.
 
-A **port** is sent alongside and IP address and it specifies the destination application or service running on that host computer.
+The suite is composed of multiple layers:
+| Layer           | Protocols                     | Role |
+|-----------------|-------------------------------|-|
+| Application     | **HTTP**, HTTPS, FTP, SMTP    | Interfaces with software like web browsers or email clients |
+| Transport       | **TCP**, UDP                  | Manages host-to-host communication |
+| Internet        | **IP**, ICMP                  | Handles routing across multiple networks using IP addresses |
+| Link (Network)  | Ethernet, Wi-Fi, etc.         | Handles direct connections on a single network |
+
+When making a request *HTTP* is used to format the request (GET, POST, etc.), *TCP* ensures reliable delivery, *IP* routes the data across networks.
+
+**Port numbers** identify specific applications/services on a host. When making a request, a **port** is sent alongside the IP address, it specifies the destination application or service running on the host computer.
 
 Common ports:
-- 20 and 21: FTP data and FTP control
-- 22: Remote login secure shell (SSH)
-- 53: DNS
-- 80: Hypertext Transfer Protocol (HTTP)
-- 143: E-mail Internet Message Access Protocol (IMAP)
-- 443: Secure Hypertext Transfer Protocol (HTTP)
+- `20` and `21`: FTP data and FTP control
+- `22`: Remote login secure shell (SSH)
+- `53`: Domain Name Resolution (DNS)
+- `80`: HyperText Transfer Protocol (HTTP)
+- `143`: E-mail Internet Message Access Protocol (IMAP)
+- `443`: Secure Hypertext Transfer Protocol (HTTP)
+- `666`: DOOM multiplayer 😈
 
-Port values range from 0 - 65535. Numbers between 0 - 1023 are reserved for common applications.
+Port values range from `0-65535`. Numbers between `0-1023` are reserved for common applications. Development servers often use ports `4000`, `8000`, `8080`.
 
 **HTTP** is a stateless request-response protocol. Client applications (user agents) request data and server applications send data.
 
-![http request response](assets/http-req-resp.png)
+By stateless we mean that the server doesn't remember anything about the client between requests. Extra mechanisms like cookies or sessions are used to identify and keep track of a client.
 
-![http status codes](assets/http-status-codes.png)
+| ![http request response](assets/http-req-resp.png) | ![http status codes](assets/http-status-codes.png) |
+|-|-|
 
 **MVC**
 - *Model* - store, generate, retrieve data
