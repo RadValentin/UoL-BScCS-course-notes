@@ -32,6 +32,8 @@ TODO
 > [!TIP] 
 > Make sure to do the peer-review lab exercises. Those before Week 10 will be part of the midterm and those after can/will show up in the exam.
 
+#### [CM3070 Computer Science Final Project](./Final%20Project/summary.md) - *IN PROGRESS*
+
 ## Tips & Tricks
 **Don't sleep on the midterms**
 Start working on the midterm assignments as soon as they're given to you. The midterm is usually less demanding then the finals as it covers only the first 10 weeks of lectures and it's a good opportunity to get a good grade at the end. Midterm weighs 30% to 50% of the final grade. **If you fail the midterm, you will fail the module** so don't leave it for the last possible moment.
