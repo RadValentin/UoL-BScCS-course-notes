@@ -19,13 +19,16 @@ ALLOWED_HOSTS = ['.coursera-apps.org',]
 **Resources:**
 - [REST API Crash Course](https://youtu.be/qbLc5a9jdXo?si=qg2pRchVfMW6wgjq)
 
+>[!INFO]
+> TODO: Try using Docker inside WSL to have an easily replicable Django dev env.
+
 ## Week 1
 Create a Python virtual environment
 ```bash
 python -m venv env_name # typically env or venv
 ```
 
-Working with environments
+Working with virtual environments
 ```bash
 # command prompt
 env_name\Scripts\activate.bat
@@ -99,6 +102,8 @@ By stateless we mean that the server doesn't remember anything about the client 
 - *View* - controls how to build the user interface
 - *Controller* - application logic, connects the user to the model and views
 
+![MVC](assets/MVC-Process.svg)
+
 ### Django basics
 
 ```bash
@@ -123,12 +128,16 @@ urlpatterns = [
 
 In the app itself an url can map to a view, `path('', views.index, name='index')`, and the request is handled in the view code:
 ```py
+# views.py
 from django.shortcuts import HttpResponse
 
 def index(request):
     # this view returns a simple string
     return HttpResponse('This is the index page')
 ```
+
+> [!NOTE]
+> Although they're called "views", the functionality is actually similar to that of the *Controller* in MVC.
 
 Views can also render **HTML templates** which are placed in the `/templates` directory of an app. Inside a template view data can be accessed: `<p>{{ data.text }}</p>` and it's also possible to combine templates using blocks:
 
@@ -197,13 +206,15 @@ python manage.py loaddata initial.json
 ```
 
 ## Week 2
+A Django view is a function that receives a web request and returns a web response.
 
 More about views:
 - It's possible to set the response type and status code in the view: `return HttpResponse(html, content_type='text/html', status=200)`
 - Inside view logic, `request`
-    1. is an object
+    1. is an object which holds data about the incoming HTTP request
     2. `request.META` is a dictionary
     3. `request.META['REMOTE_ADDR']` is the requesting client's IP
+- The `HttpResponse` sends HTML by default but the MIME type can be changed using `content_type` (ex: `application/json`).
 
 ### Django models
 ```py
@@ -248,7 +259,6 @@ re_path('^user/(?P<name>\w+)$', helloworld.name_lookup)
 Despite the large number of files included in the starter project, it's actually possible to create a single file lightweight Django server. All you'd need to define is: a route to a view function, the view function, a minimal set of settings, a way to start the server from the command line.
 
 ## Week 3
-
 Topics: relational model, relational databases, tables (relations), data types, columns (attributes, features), rows (tuples, entities)
 
 `C:\'Program Files'\PostgreSQL\16\bin\psql.exe -h localhost -U postgres -d postgres -p 5432`
