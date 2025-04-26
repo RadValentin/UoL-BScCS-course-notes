@@ -18,6 +18,7 @@ ALLOWED_HOSTS = ['.coursera-apps.org',]
 
 **Resources:**
 - [REST API Crash Course](https://youtu.be/qbLc5a9jdXo?si=qg2pRchVfMW6wgjq)
+- [SQLiteStudio](https://sqlitestudio.pl/) - create, edit, browse SQLite databases.
 
 >[!INFO]
 > TODO: Try using Docker inside WSL to have an easily replicable Django dev env.
@@ -142,17 +143,19 @@ def index(request):
 Views can also render **HTML templates** which are placed in the `/templates` directory of an app. Inside a template view data can be accessed: `<p>{{ data.text }}</p>` and it's also possible to combine templates using blocks:
 
 ```html
+<!--base.html-->
 <head>
     <title>{% block title %}Dummy title{% endblock %}</title>
 </head>
 ```
 
 ```html
+<!--index.html-->
 {% extends "base.html" %}
 {% block title %}Hello world!{% endblock title %}
 ```
 
-To render a template for a view we use the `render` method:
+To render a template for a view we use the `render` method. The request is needed to build the HTTP response, the template might rely on authentication info, session data, etc. present in the request.
 ```py
 def about(request):
     return render(request, 'about.html')
@@ -183,7 +186,7 @@ A super user is needed to access the admin panel
 python manage.py createsuperuser
 ```
 
-After changing the DB model the actual DB needs to be updated by running a migration:
+After changing the DB model the actual DB needs to be updated by running a migration. A **migration** is a file that tells Django how to change the database to match the models.
 
 ```bash
 # create a migration file
@@ -206,14 +209,15 @@ python manage.py loaddata initial.json
 ```
 
 ## Week 2
-A Django view is a function that receives a web request and returns a web response.
+A Django view is a function that receives a web request and returns a web response. Each view is responsible for returning an `HttpResponse` object, it also receives a `HttpRequest` object as its first argument.
 
 More about views:
 - It's possible to set the response type and status code in the view: `return HttpResponse(html, content_type='text/html', status=200)`
 - Inside view logic, `request`
     1. is an object which holds data about the incoming HTTP request
-    2. `request.META` is a dictionary
-    3. `request.META['REMOTE_ADDR']` is the requesting client's IP
+    1. `request.method` can be used to check if the request was a `GET`, `POST`, etc.
+    1. `request.META` is a dictionary containing all HTTP headers of the request coming it from the client
+    1. `request.META['REMOTE_ADDR']` is the requesting client's IP
 - The `HttpResponse` sends HTML by default but the MIME type can be changed using `content_type` (ex: `application/json`).
 
 ### Django models
@@ -234,6 +238,10 @@ class Address(models.Model):
     # models can be linked together through foreign keys
     resident = models.ForeignKey(Person, null=True, on_delete=models.SET_NULL)
 ```
+
+#### Null vs Blank
+- `null=True` &rarr; the database can store NULL for that field (database-level)
+- `blank=True` &rarr; the form validation will allow the field to be empty (validation-level)
 
 ### Django URLs
 URL dispatching can be done in different ways:
