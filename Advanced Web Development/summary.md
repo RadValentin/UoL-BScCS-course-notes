@@ -143,14 +143,16 @@ def index(request):
 Views can also render **HTML templates** which are placed in the `/templates` directory of an app. Inside a template view data can be accessed: `<p>{{ data.text }}</p>` and it's also possible to combine templates using blocks:
 
 ```html
-<!--base.html-->
+<!-- base.html -->
+<!-- the block will be filled in by the template that extends the base -->
 <head>
     <title>{% block title %}Dummy title{% endblock %}</title>
 </head>
 ```
 
 ```html
-<!--index.html-->
+<!-- index.html -->
+<!-- no need to write head/title tags, just pass in the title content -->
 {% extends "base.html" %}
 {% block title %}Hello world!{% endblock title %}
 ```
@@ -244,7 +246,7 @@ class Address(models.Model):
 - `blank=True` &rarr; the form validation will allow the field to be empty (validation-level)
 
 ### Django URLs
-URL dispatching can be done in different ways:
+*URL dispatching* is the process of mapping HTTP requests to functions in views (aka routing). It can be done in different ways:
 ```py
 # static dispatch
 path('user', helloworld.return_all)
@@ -253,17 +255,14 @@ path('user/int:id', helloworld.id_lookup)
 # a string with the name `name` will be sent to the view fn
 path('user/str:name', helloworld.name_lookup)
 ```
-Regular expressions can be used for more complex matching and Django has its own 
-syntax for capturing variables from a RE string:
+Regular expressions can be used for more complex matching and Django has its own syntax for capturing variables from a RE string:
 ```py
-# static dispatch
 re_path('^user$', helloworld.return_all)
 re_path('^user/(?P<id>\d+)$', helloworld.id_lookup)
 re_path('^user/(?P<name>\w+)$', helloworld.name_lookup)
 ```
 
 ### Django lightweight
-
 Despite the large number of files included in the starter project, it's actually possible to create a single file lightweight Django server. All you'd need to define is: a route to a view function, the view function, a minimal set of settings, a way to start the server from the command line.
 
 ## Week 3
@@ -487,6 +486,12 @@ Variables that are sent as a dictionary, ex: ` {'first_name': 'John', 'last_name
 ```html
 <p>My first name is {{ first_name }}. My last name is {{ last_name }}.</p>
 ```
+
+**Filters** are used to modify variables for display:
+- `{{ name|lower }}` -  show as lowercase
+- `{{ text|escape|linebreaks }}` - chained, escape special chars and convert line breaks to `<p>` tags
+- `{{ bio|truncatewords:30 }}` - display the first 30 words only
+- `{{ value|default:"nothing" }}` - show a default value if the variable is false or empty
 
 We can define a base template with elements that are common to multiple pages:
 ```html
