@@ -1,13 +1,17 @@
 {
   "cSpell.maxNumberOfProblems": 1000,
   "cSpell.words": [
+    "elif",
     "flexbox",
     "GLSL",
     "HLSL",
+    "kwargs",
     "overrightarrow",
     "Phong",
+    "psycopg",
     "smallmatrix",
     "timestep",
+    "VARCHAR",
     "Varyings"
   ]
 }
