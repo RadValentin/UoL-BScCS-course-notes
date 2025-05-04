@@ -17,9 +17,12 @@ Images, text and any other resources contained in this repo were taken without g
 TODO
 
 ### Level 6
+
 #### [CM3005 Data Science](./Data%20Science/notes.md)
 >[!TIP]
 > Make sure to evaluate your own work (self-evaluation) in the midterm report. It's easy to not pay attention to this and you'll lose points for it.
+
+#### [CM 3025 - Virtual reality](./Virtual%20Reality/summary.md)
 
 #### [CM3035 Advanced Web Development](./Advanced%20Web%20Development/summary.md) - *IN PROGRESS*
 > [!TIP]
