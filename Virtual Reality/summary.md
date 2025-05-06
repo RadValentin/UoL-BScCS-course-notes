@@ -1,16 +1,17 @@
 # Virtual Reality
-
 > Lecturer: Dr. M. Gillies, Dr. S. Pan
 
 ## Notes
-
 Assessment:
 - Midterm 30% - Coursework 1
 - Final 70% - Coursework 2
 
-Useful links:
-- [How to make a VR game - Unity XR Toolkit 2022](https://youtube.com/playlist?list=PLpEoiloH-4eP-OKItF8XNJ8y8e1asOJud&si=NcindXjNyAsWS9Hh)
-
+### Tips
+- I used Unity 2022.3.55f1 for development as most tutorials will be compatible with the LTS versions. Unity 6 is out now but it introduced a lot of changes and it will more challenging to follow an old tutorial if the UI is different. That's why I chose an older version.
+- For development I suggest starting your project from the URP (Universal Render Pipeline) template. URP gives better performance on mobile than SRP (Standard Render Pipeline) which is older.
+- Some assets from the Unity Store are made for URP, others for the older pipeline. That's why when you import them they will appear broken (pink color). But this can be fixed by changing the material shader, no need to worry.
+- The lectures are very hit-or-miss. The stuff covered by Tom (bald guy) is great and very useful. The rest, not so much but feel free to judge for yourself.
+- The way the course teaches you to listen for controller input events (button press) is very cumbersome to implement and not needed really. There are easier ways to do it. This tutorial series helped me out a lot when developing my game and answered a lot of questions I had: [How to make a VR game - Unity XR Toolkit 2022](https://youtube.com/playlist?list=PLpEoiloH-4eP-OKItF8XNJ8y8e1asOJud&si=NcindXjNyAsWS9Hh)
 
 ## Week 1
 Generally **virtual reality** refers to computer generated versions of the real or fantasy world. A more specific definition is that virtual reality effectively immerses the user in a responsive virtual world.
