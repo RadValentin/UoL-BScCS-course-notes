@@ -8,6 +8,7 @@ Lecturer: Dr Daniel Buchan
 
 Packages to use for development that will work well together:
 - Python 3.11
+- `pip install virtualenvwrapper`
 - `pip install Django==4.2`
 - `pip install psycopg2==2.9.9` (`psycopg2-binary==2.9.9` instead?)
 
@@ -251,9 +252,9 @@ class Address(models.Model):
 # static dispatch
 path('user', helloworld.return_all)
 # an integer with the name `id` will be sent to the view fn
-path('user/int:id', helloworld.id_lookup)
+path('user/<int:id>', helloworld.id_lookup)
 # a string with the name `name` will be sent to the view fn
-path('user/str:name', helloworld.name_lookup)
+path('user/<str:name>', helloworld.name_lookup)
 ```
 Regular expressions can be used for more complex matching and Django has its own syntax for capturing variables from a RE string:
 ```py
@@ -261,6 +262,8 @@ re_path('^user$', helloworld.return_all)
 re_path('^user/(?P<id>\d+)$', helloworld.id_lookup)
 re_path('^user/(?P<name>\w+)$', helloworld.name_lookup)
 ```
+
+To use the values of path parameters you should include them in the view fn signature, ex: `def index(request, id)`.
 
 ### Django lightweight
 Despite the large number of files included in the starter project, it's actually possible to create a single file lightweight Django server. All you'd need to define is: a route to a view function, the view function, a minimal set of settings, a way to start the server from the command line.
@@ -280,8 +283,8 @@ CREATE DATABASE example;
 \list
 
 CREATE TABLE people(
-    pk SERIAL PRIMARY KEY, name VARCHAR(255) NOT NULL,
-    name VARCHAR(255) 
+    pk SERIAL PRIMARY KEY, 
+    name VARCHAR(255) NOT NULL,
     height_cm INT, 
     gender VARCHAR(255), 
     date_of_birth DATE
@@ -308,21 +311,31 @@ ALTER TABLE address ADD FOREIGN KEY (people_pk) REFERENCES people(pk);
 ALTER TABLE people ADD address_pk INT;
 ALTER TABLE people ADD FOREIGN KEY (address_pk) REFERENCES address(pk);
 
-INSERT INTO People(name, height_cm, gender, date_of_birth) VALUES
+INSERT INTO people(name, height_cm, gender, date_of_birth) VALUES
     ('BEN', 167, 'Male', '1978-03-14');
 ```
 
-`SERIAL` - an integer that is auto incremented.
+Note: In PostgreSQL a `SERIAL` is an integer that is auto incremented.
 
 ### Normalisation
-#### First normal form
-The data is indexed with an unique primary key, there are no repeating unit groups and the data is atomic.
+**Normalisation** is the process of organizing data in a database to reduce redundancy (duplicate data) and improve data integrity. Ex: instead of repeating an artist's name in every track row, you store the artist once in a separate table and reference it.
 
-#### Second normal form
-Remove duplicates that depend of aggregates including the primary key.
+#### First normal form (1NF)
+- Each table has a **primary key** that uniquely identifies rows.
+- All fields contain **atomic values** (no lists or nested data).
+- There are **no repeating groups** or columns with multiple values.
 
-#### Third normal form
-There are no transitive dependencies between the data.
+#### Second normal form (2NF)
+- Meets all requirements of 1NF.
+- **Removes partial dependencies** - meaning that every non-key column must depend on the whole primary key, not just part of it.
+
+Note: Applies mainly to tables with composite primary keys (e.g. in many-to-many relationships).
+
+#### Third normal form (3NF)
+- Meets all requirements of 2NF.
+- **No transitive dependencies** - non-key columns must only depend on the primary key, not on other non-key columns.
+
+Example: If a `tracks` table stores both `artist_id` and `artist_name`, remove `artist_name` (store it only in the `artists` table).
 
 ### Query performance
 
