@@ -338,10 +338,22 @@ Note: Applies mainly to tables with composite primary keys (e.g. in many-to-many
 Example: If a `tracks` table stores both `artist_id` and `artist_name`, remove `artist_name` (store it only in the `artists` table).
 
 ### Query performance
+A **table index** is a data structure that improves the speed of data retrieval from a table (`SELECT`, `JOIN`, `ORDER BY`, etc). It keeps track of values in one or more columns similar to a lookup table.
+
+Disadvantages: slower writes (index update) and extra storage space needed.
 
 ```sql
 -- queries that search on the entity column will be faster
 CREATE INDEX entity_index ON genes(entity);
+```
+
+Queries can be optimized by limiting the amount of data that goes into a join operation.
+
+```sql
+-- filter genes table and store it under an alias (sub) when running the join
+SELECT sub.*, ec.* 
+FROM (SELECT * FROM genes WHERE entity='Chromosome') sub 
+JOIN ec ON sub.ec_pk = ec.pk;
 ```
 
 A **materialized view** is a database object that contains the results of a query. In PostgreSQL the view doesn't automatically change its contents when one of the tables it references changes. The refresh can be triggered with the `REFRESH MATERIALIZED VIEW <view_name>` command.
