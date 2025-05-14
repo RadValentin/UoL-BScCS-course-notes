@@ -419,8 +419,14 @@ class Gene(models.Model):
 
 Data models allow the implementation to be decoupled from the database engine making it easy to swap between them, ex: SQLite for local development and then MySQL or PostgreSQL for production.
 
+In order to connect to a PostgreSQL database we must first install the PostgreSQL driver for Python — Psycopg and then update our project's `settings.py`.
+
 ```bash
+# Note: this package requires compilation which can involve other dependencies
 pip install psycopg2
+
+# already compiled version, faster to install
+pip install psycopg2-binary
 ```
 
 ```py
@@ -453,6 +459,7 @@ SELECT * FROM django_migrations WHERE app='genedata';
 ```
 
 ### Adding data to the database
+Data can be added through the admin interface which requires super user credentials to be created.
 ```bash
 # create admin account
 python manage.py createsuperuser
@@ -476,16 +483,31 @@ class GeneAttributeLinkInline(admin.TabularInline):
 # specify which fields are editable through admin interface
 class GeneAdmin(admin.ModelAdmin):
     list_display = ('gene_id', 'entity', 'start', 'stop', 'sense')
-    # enable inline selector
+    # enable inline selector defined above
     inlines = [GeneAttributeLinkInline]
 
+# register that Gene model is editable as specified in the GeneAdmin class
 admin.site.register(Gene, GeneAdmin)
-# register just the model using default admin class
+# for this model use the default admin class
 admin.site.register(Attribute)
 ```
 
-### Views
-QuerySet API
+### Queries using the Django ORM
+Models can be queried through the QuerySet API. This is similar to SQL querying but it's implemented using Python objects and it database agnostic.
+
+- https://docs.djangoproject.com/en/4.2/topics/db/queries/
+- https://docs.djangoproject.com/en/4.2/ref/models/querysets/
+
+A **lookup** is a keyword used in a QuerySet filter to compare a field against a value.
+- `exact`: Exact match - `filter(title__exact='Imagine')`
+- `iexact`: Case-insensitive exact match - `filter(title__iexact='imagine')`
+- `contains`: Substring match - `filter(title__contains='Love')`
+- `icontains`: Case-insensitive substring match - `filter(title__icontains='love')`
+- `gt`, `lt`, `gte`, `lte`: Comparisons - `filter(tempo__gt=100)`
+- `in`: Value is in a list - `filter(genre__in=['rock', 'pop'])`
+- `startswith`: String starts with a value - `filter(title__startswith='The')`
+- `isnull`: Checks if the field is NULL - `filter(artist__isnull=True)`
+
 
 ```py
 # function to respond to requests
@@ -500,9 +522,23 @@ def gene(request, pk):
     return render(request, 'gene.html', {'gene': gene})
 
 def list(request, type):
-    # get all rows that match the condition
+    # Lookup: get all rows in which `entity` is exactly equal to the value of `type`
     genes = Gene.objects.filter(entity__exact=type)
     return render(request, 'list.html', {'genes': genes, 'type': type})
+```
+
+Note: From a model we can get data on its own properties as well as those of other models referenced as foreign keys without requiring an explicit join.
+
+More on lookups: https://docs.djangoproject.com/en/4.2/ref/models/lookups/
+
+Data in models can also be updated or deleted:
+```py
+# update
+gene.access += 1
+gene.save()
+
+# delete
+GeneAttributeLink.objects.filter(gene_id=pk).delete()
 ```
 
 ## Week 5
