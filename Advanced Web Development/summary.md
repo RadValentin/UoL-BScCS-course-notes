@@ -543,6 +543,10 @@ GeneAttributeLink.objects.filter(gene_id=pk).delete()
 
 ## Week 5
 ### Templating
+Types of entities:
+- *variables* - `{{ var_name }}` - insert variables passed from controller into template
+- *template tags* - `{{% function_name 'arg1' 'arg2' %}}` - implement logic for rendering templates
+
 Variables that are sent as a dictionary, ex: ` {'first_name': 'John', 'last_name': 'Doe'}`, can be rendered in a template:
 ```html
 <p>My first name is {{ first_name }}. My last name is {{ last_name }}.</p>
@@ -594,9 +598,9 @@ def todays_date():
     return datetime.datetime.now().strftime("%d %b, %Y")
 ```
 
-This can be called in a template:
+This can then be called in a template but the tags file needs to be loaded before use:
 ```html
-<!-- make sure template is aware of custom tags -->
+<!-- custom tags need to be loaded before use -->
 {% load my_tags %}
 <p>{% todays_date %}</p>
 ```
@@ -604,30 +608,38 @@ This can be called in a template:
 ### CSS
 Static assets can be placed in a `/static` folder inside the app and the referenced from the templates, ex: `<link rel="stylesheet" href="/static/css/genedata.css">`.
 
-Note: When referencing static elements their path is relative to the server root and not to the location of the template files.
+Note: When referencing static elements their path is relative to the server root and not to the location of the template files on disk.
 
 CSS specificity:
 ID rules > Class Rules > Element Rules
 
 ### JavaScript
-
 ![DOM hierarchy](assets/html-dom-hierarchy.png)
 
 Note: To use server data inside JavaScript, it's recommended to output this data through the [`json_script` filter](https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#json-script).
 
+List of all event handlers: https://udn.realityripple.com/docs/Web/API/GlobalEventHandlers
+
 ### Bootstrap
+**Bootstrap** is a popular open-source CSS framework used to quickly build responsive, mobile-first websites. It provides ready-made components (like buttons, navbars, forms) and a grid system that helps layout pages consistently without writing much custom CSS.
+
 ```bash
-pip install django-bootstrap
+pip install django-bootstrap4
+# OR
+pip install django-bootstrap5
 ```
 `bootstrap4` needs to be added to `INSTALLED_APPS` then the Bootstrap components can be loaded and referenced inside templates:
 
 ```html
+<!-- must be loaded before use -->
 {% load bootstrap4 %}
 <head>
+    <!-- these insert Bootstrap CSS and JS assets -->
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
 </head>
 <body>
+    <!-- this DIV can now use Bootstrap classes -->
     <div class="navbar navbar-expand-md sticky-top flex-column">
         <!-- ... -->
     </div>
