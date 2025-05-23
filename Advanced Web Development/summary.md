@@ -647,6 +647,7 @@ pip install django-bootstrap5
 ```
 
 ## Week 6 - Forms
+*Django forms* are a built-in way to create, display and validate HTML forms using Python code.
 
 ```py
 # define form
@@ -658,6 +659,7 @@ class ECForm(forms.Form):
 # use form in view
 def create_ec(request):
     if request.method == 'POST':
+        # populate the form with the data sent by the user
         form = ECForm(request.POST)
         if form.is_valid():
             # create a new row
@@ -670,6 +672,8 @@ def create_ec(request):
         form = ECForm()
         return render(request, 'genedata/ec.html', {'form': form, 'ecs': ecs})
 ```
+
+Note: `request.POST` contains the data sent via the POST request.
 
 To render the form inside the template you need to include a `csrf_token` and output the form variable:
 ```html
@@ -685,10 +689,10 @@ To render the form with bootstrap: `{% bootstrap_form form %}`.
 `ModelForm`s allow the forms to be specified directly based the model.
 
 ```py
-# define form
 from django.forms import ModelForm
 from .models import *
 
+# define form
 class GeneForm(ModelForm):
     class Meta:
         model = Gene
@@ -719,18 +723,21 @@ class ECForm(forms.Form):
                 "EC must be alphanumeric. Invalid value: %(value)s", 
                 params={'value': ec_name}
             )
+        return (cleaned_data)
 ```
 
 ### Generic views
-Generic views offer a quick way of displaying data in a model with very little code needing to be written.
+Generic views offer a quick way of displaying the data inside a model with very little code needing to be written. 
 
 ```py
 # in views.py
 from django.views.generic import ListView
 
+# this class will render the view
 class GeneList(ListView):
+    # which data to display
     model = Gene
-    # only needed if the name differs from the default (eg. genes)
+    # key name under which data is sent to template
     context_object_name = 'master_genes' 
     template_name = 'genedata/index.html'
 
@@ -740,8 +747,10 @@ path('', views.GeneList.as_view(), name='index'),
 
 **Types of generic views:**
 - `ListView` - shows a list of objects
-- `DetailView` - shows a single object
-- `CreateView` - allows data to be inserted, needs `form_class` and `success_url` to be set
+- `DetailView` 
+    - shows a single object
+    - the object is fetched based on the primary key (`pk`) or slug being parameters in the URL
+- `CreateView` - allows data to be inserted into a model through a form (`form_class` )and redirects to `success_url` afterwards
 - `DeleteView` - delete data, needs `success_url` to be set and a corresponding delete confirmation template to be implemented, ex: `author_confirm_delete.html` for deleting objects from the `Author` model.
 - `UpdateView` - updates data, must specify `fields` list and an update template must be implemented.
 
@@ -752,6 +761,8 @@ def get_context_data(self, **kwargs):
     context['master_genes'] = Gene.objects.all()
     return context
 ```
+
+Note: `form.as_p` is a shortcut to render the whole form using simple HTML paragraphs, useful for quick prototyping.
 
 ## Week 7 - RESTful APIs
 ### CRUD operations
