@@ -771,37 +771,70 @@ Note: `form.as_p` is a shortcut to render the whole form using simple HTML parag
 ### Representational State Transfer (REST)
 REST is a design pattern and software architecture for building scalable web servers and web applications.
 
+Use 
+- `POST` to *create* (on a collection)
+- `PUT` to *replace* (individual item) and 
+- `PATCH` to *modify* (partially update item)
+
 An user agent should be able to navigate through the resource or web application using standard HTTP operations (PUT, GET, etc).
 
-**Features:**
-1. Client-server architecture
-2. Statelessness 
+**REST Features**
+1. *Client-server architecture* -  frontend and backend are separated
+2. *Statelessness* 
     - same response for the same request
-3. Cacheable
-4. Layered System 
+    - each request must contain all the info needed to understand and process it
+3. *Cacheable* - responses should say whether they can be cached
+4. *Layered System* 
     - server side implementation details should not need to be known by the client
-5. Uniform Interface 
+    - clients can't tell if they're talking to the actual server or an intermediary
+5. *Uniform Interface* - a consistent, general way to interact with all resources
     - URIs identify resources
-    - HTTP responses specify how clients handle the data typically by defining media types.
+    - HTTP responses specify how clients handle the data typically by defining media types
     - HTTP responses provide hyperlinks needed for the client to navigate further through the app
-6. Code-on-demand (optional)
+6. *(optional) Code-on-demand* - server can return executable code (like JavaScript)
 
 ![REST behavior](assets/REST-behaviour.png)
 
+**REST API Requirements**
+- The application has a *base URI* that identifies the API entry point, ex: `http://api.example.com/api/`
+- Use only standard HTTP methods (`POST`, `PUT`, `DELETE`, etc)
+- Defines a *media type* (also called `Content-Type`) for data transfer (`application/json`, `application/xml`, etc)
+
+**Hypermedia as the Engine of Application State (HATEOAS)** is a constraint of the REST architecture where clients interact with the server entirely through links provided in responses.
+
+The server doesn't just return data - it returns *links* or instructions to guide what the client can do next:
+
+```json
+//  GET /order/5
+{
+  "status": "pending",
+  "next": "/order/5/cancel"
+}
+```
+
+> RESTful applications provide a means for users to perform CRUD operations on a remote database through well-defined HTTP methods. 
+
 ### REST in Django
+Requirements:
+- API code should be separated from HTML generating code (`api.py`)
+- Database data (Python objects) need to be serialized to JSON (*DRF serializers*)
 
 > Django REST framework docs: https://www.django-rest-framework.org/
 
 **Setup:**
 ```bash
 pip install djangorestframework
+pip install markdown # Markdown support for the browsable API.
+pip install django-filter  # Filtering support
 ```
 ```py
 # settings.py
 INSTALLED_APPS = [
     'rest_framework',
+    # ...
 ]
-# allow any users to access the REST API
+
+# allow any users to access the REST API (development only)
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework_permissions.AllowAny',
@@ -809,7 +842,7 @@ REST_FRAMEWORK = {
 }
 ```
 
-A serializer takes data from a model and outputs it in a format that the user can see. It also works in reverse, checking user data against a model. We can define it explicitly by listing all the model attributes and constraints:
+A **serializer** takes data from a model and outputs it in a format that can be transmitted to the user. It also works in reverse, checking user data against a model. We can define it explicitly by listing all the model attributes and constraints:
 
 ```py
 from rest_framework import serializers
@@ -820,17 +853,19 @@ class GeneSerializer(serializers.Serializer):
     start = serializers.IntegerField()
 ```
 
-It's also possible to use `ModelSerializer`s to reuse the data definition already set by the model:
+A `ModelSerializer` will reuse the data definition as it was described in the model. This reduces the redundancy and the amount of code we need to write:
 
 ```py
+# serializers.py
 class GeneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gene
         fields = ['gene_id', 'entity', 'start', 'stop', 'sense', 'start_codon']
 ```
 
-Then to implement a GET API endpoint:
+Then to implement a `GET` API endpoint:
 ```py
+# api.py
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
@@ -847,6 +882,13 @@ def gene_detail(request, pk):
         # serialize model row to JSON
         serializer = GeneSerializer(gene)
         return JsonResponse(serializer.data)
+    if request.method == 'POST'
+        # try to parse data coming from the user
+        serializer = GeneSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save() # save data to DB
+            return HttpResponse(status=201) # CREATED
+        return HttpResponse(serializer.errors, status=400) # BAD REQUEST
 ```
 And add it to `urls.py`: `path('api/gene/<int:pk>', api.gene_detail),`.
 
@@ -867,9 +909,24 @@ urlpatterns = [
 ]
 ```
 
+**Decorators** are functions that modify the behaviour of other functions or methods. They are typically used to add extra functionality to views (authentication, permissions, caching or logging) without modifying the actual view logic.
+
+Examples:
+- `@login_required`: Ensures that the user is authenticated before accessing a view.
+- `@require_http_methods`: Restricts the allowed HTTP methods (GET, POST, etc.) for a view.
+
+In DRF some common decorators include:
+- `@api_view`: Specifies that the view is a function-based view and what HTTP methods are allowed.
+- `@permission_classes`: Specifies the permissions required for accessing the view or viewset.
+
+DRF also includes its own `Response` function which will format the API response for presentation when accessed through the browser. It can be used instead of `JsonResponse` or `HttpResponse`.
+
 Mixins can be used to specify which operations are supported by an endpoint.
 
 ```py
+from rest_framework import generics
+from rest_framework import mixins
+
 class GeneDetails(mixins.CreateModelMixin, 
                   mixins.RetrieveModelMixin,
                   generics.GenericAPIView):
