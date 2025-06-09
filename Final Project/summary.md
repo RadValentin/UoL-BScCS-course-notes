@@ -66,5 +66,31 @@ The phases of a project: Discovery, Design, Development, Delivery + Testing.
 - "Does the video display knowledge of the area of study, previous work or academic literature?"
 - "Does the video critically evaluate the previous work and/or academic literature?"
 - benefits, what's missing, areas of improvement
+- don't take claims at face value, verify and evaluate how they apply
 
 ### Time planning
+Create a Gantt chart or use a tool like Trello to plan your project and track your progress. Consider having a work journal document as well where you write what you did each week. You can also use it to keep track of challenges faced, what worked/didn't work and ideas that you have.
+
+## Week 3
+### Project proposal
+Testing during discovery: Does your background research support your idea?
+
+Ethics concerns: 
+- research with human participants
+  - subjects need to be informed what the study is about, how their data will be used
+  - typically an information sheet or consent form is used
+- broader harms - environmental harm, societal harm, etc.
+- conflicts of interest - financial or personal involvement
+- personal data - how data is stored securely, permission to use personal data
+- copyrighted content
+
+## Week 4
+
+### Preliminary report structure
+- **Introduction**
+  - State what template you're using right at the beginning of the report, in the introduction.
+- **Literature Review**
+- **Design**
+- **Demo Video**
+  - Don't speed it up in editing
+  - Develop the ability to curate what you present
