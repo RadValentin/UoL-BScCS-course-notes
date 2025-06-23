@@ -1056,6 +1056,7 @@ const request = new XMLHttpRequest();
 request.open('GET', '/api/message', true);
 // Attach an event listener function
 request.onreadystatechange = function () {
+    // readyState 4 means DONE
     if (this.readyState == 4 && this.status >= 200 && this.status < 400) {
         var data = JSON.parse(this.responseText);
     }
@@ -1065,6 +1066,24 @@ request.onreadystatechange = function () {
 };
 // Initiate the request
 request.send();
+```
+
+```js
+// Modern alternative that uses Fetch API instead of XHR
+fetch('/api/message')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Request failed: " + response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Use the data here
+    console.log(data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
 ```
 
 ## Week 11
