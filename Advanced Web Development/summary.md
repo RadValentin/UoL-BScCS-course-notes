@@ -1088,17 +1088,17 @@ fetch('/api/message')
 
 ## Week 11
 ### Synchronous vs asynchronous web services
-**Synchronous design** is a design pattern in which the sequencing of events happens in series. The message sender waits for a response before continuing.
+**Synchronous design** is a design pattern in which the sequencing of events happens *in series*. The message sender waits for a response before continuing.
 
-When interacting with a synchronous web server, the client has to wait for the server to issue a response before it can issue new instructions.
+Example: when interacting with a synchronous web server, the client has to wait for the server to issue a response before it can issue new instructions.
 
 **Asynchronous design** allows the client and server to execute code in parallel through non-blocking code execution.
 
 **Client-side asynchrony** is a pattern in which the client issues async requests via AJAX and callbacks or promises for requests. The server can remain synchronous. This is typically used when the client queries a data source.
 
-**Server-side asynchrony** is useful for long-running computations while ensuring the app remains responsive. Ex: sending batch emails, processing files. The client polls the server to check if the calculation has been completed.
+**Server-side asynchrony** is useful for long-running computations while ensuring the app remains responsive. Time consiming tasks are offloaded to another system. Ex: sending batch emails, processing files. The client polls the server to check if the calculation has been completed.
 
-**Web sockets** provide an ongoing channel for bi-directional communication between client and server.
+**Web sockets** provide an ongoing channel for bi-directional communication between client and server. Sockets are an entirely different way of communication than HTTP and use a different protocol.
 
 ### Task queues
 Task queues offload computation to a parallel system. Series of "workers" monitor a queue for units of work/computation. This enables async computation and gives good separation of concerns: web server, queue broker, workers.
@@ -1107,19 +1107,26 @@ Task queues offload computation to a parallel system. Series of "workers" monito
 
 > A task queue's input is a unit of work called a task. Dedicated worker processes constantly monitor task queues for new work to perform.
 
-Queues/Brokers:
-- RabbitMQ - open source message broker, many messaging protocols
-- Redis - open source, in-memory key-value data store, cache or message broker
+![task queues](assets/task-queues.png)
 
-Queue frameworks: [Celery](https://docs.celeryq.dev/en/stable/getting-started/introduction.html#get-started), Dramatiq, Sidekiq, RQ, Delayed_job, RabbitMQ, AnyMQ
+**Message Brokers:**
+- *RabbitMQ* - open source message broker, many messaging protocols
+- *Redis* - open source, in-memory key-value data store, often used as cache or <u>message broker</u>
 
-**Celery** is a task queue. Clients submit units of work to a queue broker, workers watch the broker and complete the work as it appears. Multiple queues and multiple workers can be used. Celery integrates easily with Django.
+**Queue <u>frameworks</u>**: [Celery](https://docs.celeryq.dev/en/stable/getting-started/introduction.html#get-started), Dramatiq, Sidekiq, RQ, Delayed_job, RabbitMQ, AnyMQ
+
+**Celery** is a task queue system. Clients submit units of work to a queue broker, workers watch the broker and complete the work as it appears. Multiple queues and multiple workers can be used. Celery integrates easily with Django.
 
 Celery requires a solution to send and receive messages; usually this comes in the form of a separate service called a **message broker**.
 
-**Workers** are daemonised python threads. They take units of work from the queue and run some Python function.
+**Workers** are daemonised (background) Python threads. They take units of work from the queue and run some Python function.
 
 **Daemon** - a piece of software that runs as a background process, rather than being under the direct control of an interactive user.
+
+**Django + Celery + Redis** are commonly used together to handle background tasks in web applications:
+- **Django**: Your main web application (e.g. user submits a form).
+- **Celery**: A *task queue* system that runs time-consuming jobs outside the web request/response cycle.
+- **Redis**: A fast in-memory data store used as a *message broker* between Django and Celery. Redis queues up tasks for Celery to process asynchronously.
 
 ```bash
 # install Celery and the packages it needs to connect to Redis
