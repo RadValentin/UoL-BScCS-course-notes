@@ -1132,11 +1132,15 @@ Celery requires a solution to send and receive messages; usually this comes in t
 # install Celery and the packages it needs to connect to Redis
 pip install celery[redis]
 
-# install Redis
+# install interface so Python can interact with Redis
 pip install redis
 ```
 
-Note: Follow this tutorial to [install Redis](https://redis.io/blog/redis-on-windows-10/) on Windows 10. Then run `sudo service redis-server start` and `redis-server` and leave the terminal running.
+Follow this tutorial to [install Redis](https://redis.io/blog/redis-on-windows-10/) on Windows 10. Then run:
+- `redis-cli ping` - check if Redis is already running the background (it should respond with `PONG`)
+- `redis-cli monitor` - shows all commands received by the Redis server in real-time 
+- `sudo service redis-server stop` - stops the Redis running in the background
+- `redis-server` - runs Redis in the foreground, log output is shown in the terminal
 
 
 ```py
@@ -1148,14 +1152,13 @@ import random
 # parameters: package name, queue location, location for results
 app = Celery('simple_task', broker='redis://localhost/', backend='redis://localhost/')
 
-# define a task
+# define tasks that can be ran by workers
 @app.task
 def wait():
     wait_time = random.random() * 5
     time.sleep(wait_time)
     return "I waited for "+str(wait_time)+" seconds"
 ```
-
 
 ```bash
 # run celery, simple_task package, start workers and set a log level
@@ -1171,10 +1174,6 @@ from simple_task import wait, greater_than
 result = wait.delay()
 print("state", result.state)
 print("value", result.get()) # wait for result
-
-result2 = greater_than.delay(4, 5)
-print("state", result2.state)
-print("value", result2.get())
 ```
 
 ### Celery and Django
