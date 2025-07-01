@@ -1188,7 +1188,7 @@ celery --app=image_store.celery:app worker --loglevel=INFO --pidfile=celery.pid 
 ```
 
 ## Week 12
-**Web sockets** came about because of the need to standardize engineering practice in real-time web communication. Before, it was difficult to make the server initiate communication with a client, as the HTTP model was primarily based around the client initiating requests and waiting for a responses.
+**Web sockets** came about because of the need to standardize engineering practice in real-time web communication. Before, it was difficult to make the server initiate communication with a client, as the HTTP model was primarily based around the client initiating requests and waiting for a response.
 
 **Short polling** is the technique of the client requesting updates from the server at a given interval, to check if a resource has changed. It has many disadvantages: how often to poll, redundant requests, additional server load.
 
@@ -1196,10 +1196,12 @@ The **Comet** model is a workaround in which an HTTP connection is kept open for
 
 **HTTP Streaming** exploits a quirk of HTTP servers. The server responds to a request before the whole request is sent. The client holds off sending the terminating part of the request. By not terminating the request, ongoing two way communication is possible.
 
-Both long polling and streaming repurpose tools that were not designed for purpose and make it difficult to manage connections.
+Both long polling and streaming repurpose tools in ways they weren't intended to be used. This makes it difficult to manage connections.
 
 ### WebSockets
-WebSockets is a 'thin' protocol over TCP/IP without it being wrapped in a HTTP message. It provides details for establishing a connection and agreeing how the data should be encapsulated.
+WebSockets is a <u>thin</u> protocol over TCP/IP, data can be sent and received without needing to wrapped in a HTTP message. It provides details for establishing a connection and agreeing how the data should be encapsulated.
+
+A WebSockets connection begins with a handshake sent over HTTP which requests that the connection is upgraded to use sockets. If the servers supports sockets, it sends a confirmation. Now client and server can communicate bidirectionally over TCP.
 
 | Client initiates connection with handshake | Servers confirms the connection |
 |-|-|
@@ -1230,19 +1232,34 @@ Channels are Django's implementation of the WebSockets protocol. They replace th
 
 Channels are subscribable streams of data. HTTP handling is implemented as a pre-made channel.
 
-*Scope*: the details that define a connection and a request to join a channel
+**Scope**: the *details* that define a connection and a request to join a channel
 
-*Events*: the stream of user interactions for the channel that get sent to every attached client
+**Events**: the stream of user interactions for the channel that get sent to every attached client
 
 ![chat channel](assets/chat-channel.jpg)
 
 ![http channel](assets/http-channel.jpg)
 
-*Consumers* are pieces of code that consume events (similar to views). Channel requests are routed to the appropriate consumer. A client connected to a consumer will receive all events on that channel. Channel support http, WebSockets and other protocols.
+**Consumers** are pieces of code that consume events (similar to views). Channel requests are routed to the appropriate consumer. A client connected to a consumer will receive all events on that channel. Channel support http, WebSockets and other protocols.
 
 ```bash
 pip install channels[daphne]
 pip install channels-redis 
+```
+
+Channels docs: https://channels.readthedocs.io/en/stable/introduction.html
+
+The `json_script` template tag outputs a Python object as JSON-encoded data in a HTML `<script>` tag with a given id. Example, for `{{ room_name|json_script:"room-name" }}` it will render:
+
+```html
+<script id="room-name" type="application/json">"my_room"</script>
+```
+
+We can then access this data in JavaScript:
+
+```js
+const roomName = JSON.parse(document.getElementById("room-name").textContent);
+console.log(roomName); // "my_room"
 ```
 
 ## Week 13
