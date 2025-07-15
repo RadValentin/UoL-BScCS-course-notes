@@ -1287,10 +1287,29 @@ For dynamic websites where the content changes after submitting a form (ex: sear
 ### Accessing APIs with JavaScript
 
 1. Using `XMLHttpRequest`
-1. Using jQuery's `$.ajax`
-1. Using WebSockets
-1. Using the `fetch` API
+2. Using jQuery's `$.ajax`
+3. Using WebSockets
+```js
+let socket = new WebSocket("wss://example.com");
+socket.onopen = function(e) {
+    socket.send("Hello world");
+};
+socket.onmessage = function(event) {
+    // do something with event.data
+};
+socket.onclose = function(event) {
+    if (event.wasClean) {
+        // cleanly closed
+    } else {
+        // do something when dropped
+    }
+};
+socket.onerror = function(event) {
+    // do something when there's an error
+};
+```
 
+4. Using the `fetch` API
 ```js
 async function getData() {
     let response = await fetch("http://example.com");
@@ -1312,9 +1331,79 @@ wget -r www.google.com
 
 # different way to do the same thing, saves response to a file
 curl www.google.com > index.html
-# passing parameters as an argument
+# passing POST data as an argument
 curl -d 'db=taxonomy&id=9606' www.google.com
 ```
 
+Documentation for Requests Python library: https://requests.readthedocs.io/en/latest/
+
 ## Week 14
 
+**OpenAPI** (previously Swagger) is a specification for building and describing RESTful APIs in a standard, machine-readable format. This way, both computers can humans can understand the capabilities of a service in a standardised way.
+
+An API is described in YAML or JSON format (JSON types map to API types), this includes endpoints, HTTP methods, parameters, request/response formats and authentication methods. The specification can be automatically generated. The specification object is comprised of:
+
+- info object: title, description, contact info, license, version
+- server object: describes the URI for the service, ex: development and staging servers
+- paths object: maps endpoints to operations (HTTP methods) available at those paths
+
+```js
+"paths": {
+    "/users": {
+      "get": {
+        "summary": "Get a list of users",
+        "responses": {
+          "200": {
+            "description": "A list of users",
+            "content": { 
+// ...
+```
+
+### Automatic Schema Generation
+Install dependencies needed to support OpenAPI in Django REST Framework: https://www.django-rest-framework.org/api-guide/schemas/
+
+```bash
+pip install pyyaml uritemplate inflection
+```
+
+Use DRF's manage command to generate schema in OpenAPI format and save it to a file:
+```bash
+python manage.py generateschema --format openapi-json > bioweb_schema.json
+```
+
+It's possible to automate this process by changing the main project `urls.py` file. 
+
+```py
+from rest_framework.schemas import get_schema_view
+from django.views.generic import TemplateView
+
+urlpatterns = [
+    path('', include('genedata.urls')),
+    path('admin/', admin.site.urls),
+    # this gives the schema as raw JSON
+    path('apischema/', get_schema_view(
+        title='Bioweb REST API',
+        description='API for interacting with gene records',
+        version='1.0',
+    ), name="openapi-schema"),
+    # this formats the schema as HTML using SWAGGER UI
+    path('swaggerdocs/', TemplateView.as_view(
+        template_name='genedata/swagger-docs.html',
+        extra_context={'schema_url': 'openapi-schema'}
+    ), name='swagger-ui'),
+]
+```
+
+Documenting your API: https://www.django-rest-framework.org/topics/documenting-your-api/#documenting-your-api
+
+Code generation can be used to create library for interacting with an API based on its schema.
+
+```bash
+apt-get install swagger-codegen
+
+swagger-codegen generate -i http://127.0.0.1:8080/apischema/ -l python -o ./python_client
+```
+
+For Python we can also use `openapi-python-client`: https://pypi.org/project/openapi-python-client/
+
+## Week 15
