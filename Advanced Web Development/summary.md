@@ -24,6 +24,9 @@ ALLOWED_HOSTS = ['.coursera-apps.org',]
 >[!INFO]
 > TODO: Try using Docker inside WSL to have an easily replicable Django dev env.
 
+Feedback:
+- Too many of the quizzes ask a single question and that's related to which year something was released/created. I wish the quizzes were more complex, had multiple questions (at least 5) and were about building stuff with Django.
+
 ## Week 1
 Create a Python virtual environment
 ```bash
@@ -1407,3 +1410,74 @@ swagger-codegen generate -i http://127.0.0.1:8080/apischema/ -l python -o ./pyth
 For Python we can also use `openapi-python-client`: https://pypi.org/project/openapi-python-client/
 
 ## Week 15
+### Attacks on Websites
+**Cross Site Scripting (XSS)** is a type of code injection attack. Malicious JavaScript is added to benign/trusted sites. Code will then run on the client app (browser).
+
+Types of XSS
+- *Stored attacks* - malicious JS is stored remotely, ex: the attacker makes a comment on a forum/social media/web.
+- *Reflected attacks* - attack via a non-direct route, ex: a link that contains malicious code in the URL but points to a valid domain
+
+Prevention
+- Ensure all user inputs are sanitised of code
+- Ensure all responses (output) to users do not contain code
+
+**Cross-Origin Resource Sharing (CORS)** is a browser security feature that controls which domains are allowed to access resources on a different domain via JavaScript.
+
+Browsers typically enforce a Same Origin Policy (SOP) meaning that a web page and its JS are only allowed to request resources from the same domain that the web page is hosted at. CORS allows us to control which external domains can make requests to our domain.
+
+Without CORS any website could make requests to yor server (ex: using a logged-in user's cookies) potentially leaking private data.
+
+CORS settings:
+- *Access-Control-Allow-Origin* - whitelist from which domains requests can come from
+- *Access-Control-Allow-Credentials* - whitelist if credentials from other domains can be carried over to the current one
+
+**Denial of Service (DoS)** is an attempt to take a resource/site offline by flooding the server with requests. This blocks access from legitimate users.
+
+Types of DoS attacks:
+- Have the site allocate too many resources
+- Force the server not to release resources
+- Store too much data
+
+Remediation: bigger disks, more servers, Content Delivery Networks (CDNs).
+
+In a **buffer overflow attack** the attacker sends more data than the program expects, overflowing a memory buffer and overwriting adjacent memory. This could cause the program to: crash, change its behavior, execute malicious code.
+
+Remediation: ensure buffers are sufficient, sanitise inputs, check lengths of input data.
+
+In an **SQL injection** attack, the attacker attempts to submit SQL code through an input so that it might be executed by the server - often to view, modify or delete data that would otherwise be inaccessible.
+
+Remediation: sanitise all inputs of valid SQL, construct SQL programmatically in app (ex: ORM), never execute user inputs, ensure database runs with a *low privileged* user.
+
+**Cross Site Request Forgery (CSRF)** is an attempt to trick a user into sending a malicious request. The user is authenticated legitimately but follows a link provided by an illegitimate source which causes a malicious request to be made in the name of a benign user.
+
+Remediation: correctly set CORS options, forms have a per-request form-key, users ensure they are logged out of sites when they finish.
+
+The **CSRF token** (or form-key) is a random value tied to the user's session and included as a hidden field in forms or as a header in AJAX requests. Middleware checks every request for this token. Having the token present validates that the request was made by the real user.
+
+**Clickjacking** is an UI redress attack in which the attacker inserts a layer (HTML frames) between the user and the legitimate site. The layer captures user events and data.
+
+Remediation: Set the server's Content Security Policy to not allow the site to be shown inside a frame. Django does this by default through the `X-Frame-Options` header.
+
+### Making sites secure
+Security in Django: https://docs.djangoproject.com/en/4.2/topics/security/
+Open Worldwide Application Security Project: https://owasp.org/
+
+#### XSS protection
+The Django templating system usually escape most malicious characters. Still important to check how and where user content is being rendered.
+
+#### CSRF protection
+Enable CSRF middleware and ensure `{% csrf_token() %}` is included in all forms.
+
+#### SQL injection protection
+Django model QuerySets are safe from incoming SQL. Minimise the user of raw and custom SQL, sanitise any user inputs of raw/custom SQL.
+
+#### Clickjacking protection
+Enable `X-Frame-Options` middleware which ensures the site cannot be rendered inside a 3rd-party site.
+
+#### HTTP and TLS
+Use of HTTPS over TLS to encrypt all HTTP messages.
+
+| TLS | HTTPS |
+|-------|-----|
+|![TLS](assets/TLS.png) | ![HTTPS](assets/HTTPS.png) |
+
